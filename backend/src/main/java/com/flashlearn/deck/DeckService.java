@@ -2,11 +2,13 @@ package com.flashlearn.deck;
 
 import com.flashlearn.common.ResourceNotFoundException;
 import com.flashlearn.deck.api.DeckResponse;
+import com.flashlearn.deck.api.DeckSummary;
 import com.flashlearn.generation.DeckGenerator;
 import com.flashlearn.generation.GeneratedDeck;
 import com.flashlearn.quiz.QuizOption;
 import com.flashlearn.quiz.QuizQuestion;
 import com.flashlearn.search.SemanticSearchService;
+import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.stereotype.Service;
@@ -71,5 +73,12 @@ public class DeckService {
         Deck deck = deckRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Deck not found: " + id));
         return DeckResponse.from(deck);
+    }
+
+    @Transactional(readOnly = true)
+    public List<DeckSummary> listDecks() {
+        return deckRepository.findAllByOrderByCreatedAtDesc().stream()
+                .map(DeckSummary::from)
+                .toList();
     }
 }

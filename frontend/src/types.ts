@@ -27,6 +27,13 @@ export interface Deck {
   quizQuestions: QuizQuestionView[]
 }
 
+// Lightweight deck listing for the library view.
+export interface DeckSummary {
+  id: string
+  title: string
+  createdAt: string
+}
+
 export interface GenerateDeckRequest {
   sourceText: string
   title?: string

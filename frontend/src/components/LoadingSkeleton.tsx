@@ -1,10 +1,14 @@
-// Loading placeholder shown while a deck is generated. The pulsing bars are
-// decorative (aria-hidden); the status text is announced politely to screen readers.
-export function LoadingSkeleton() {
+// Loading placeholder shown while a deck is generated or opened. The pulsing bars
+// are decorative (aria-hidden); the status text is announced politely to screen readers.
+interface LoadingSkeletonProps {
+  label?: string
+}
+
+export function LoadingSkeleton({ label = 'Generating your deck, please wait…' }: LoadingSkeletonProps) {
   return (
     <div className="mx-auto w-full max-w-2xl">
       <p role="status" className="sr-only">
-        Generating your deck, please wait…
+        {label}
       </p>
       <div aria-hidden="true" className="space-y-4">
         <div className="h-8 w-1/2 animate-pulse rounded bg-slate-200" />

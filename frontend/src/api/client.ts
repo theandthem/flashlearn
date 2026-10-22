@@ -1,5 +1,6 @@
 import type {
   Deck,
+  DeckSummary,
   GenerateDeckRequest,
   QuizResult,
   SubmitQuizRequest,
@@ -37,6 +38,10 @@ export function generateDeck(body: GenerateDeckRequest): Promise<Deck> {
     method: 'POST',
     body: JSON.stringify(body),
   })
+}
+
+export function listDecks(): Promise<DeckSummary[]> {
+  return request<DeckSummary[]>('/decks')
 }
 
 export function getDeck(id: string): Promise<Deck> {
