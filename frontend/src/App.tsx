@@ -83,6 +83,13 @@ function App() {
     }
   }
 
+  // If the deck currently shown is deleted, return to the new-deck screen.
+  function handleDeckDeleted(id: string) {
+    if (id === selectedId) {
+      handleNewDeck()
+    }
+  }
+
   return (
     <div className="min-h-dvh bg-slate-50 text-slate-900">
       <header className="border-b border-slate-200 bg-white">
@@ -102,7 +109,7 @@ function App() {
           >
             + New deck
           </button>
-          <DeckLibrary onSelect={handleOpenDeck} activeId={selectedId} reloadToken={libraryReload} />
+          <DeckLibrary onSelect={handleOpenDeck} activeId={selectedId} reloadToken={libraryReload} onDeleted={handleDeckDeleted} />
         </aside>
 
         {/* Right: input, loading, or the active deck stage */}

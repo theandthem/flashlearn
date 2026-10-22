@@ -54,3 +54,15 @@ export function submitQuiz(body: SubmitQuizRequest): Promise<QuizResult> {
     body: JSON.stringify(body),
   })
 }
+
+export async function deleteDeck(id: string): Promise<void> {
+  const response = await fetch(`/decks/${id}`, { method: 'DELETE' })
+  if (!response.ok) {
+    throw new ApiError(`Request failed (${response.status})`, response.status)
+  }
+}
+
+// URL for the SCORM package download (served as an attachment by the backend).
+export function scormUrl(id: string): string {
+  return `/decks/${id}/scorm`
+}

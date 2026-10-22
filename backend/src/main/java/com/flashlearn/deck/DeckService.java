@@ -81,4 +81,12 @@ public class DeckService {
                 .map(DeckSummary::from)
                 .toList();
     }
+
+    @Transactional
+    public void delete(UUID id) {
+        if (!deckRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Deck not found: " + id);
+        }
+        deckRepository.deleteById(id);
+    }
 }
